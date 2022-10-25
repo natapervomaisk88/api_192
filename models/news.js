@@ -10,3 +10,55 @@ export const findAll = () => {
     });
   });
 };
+
+export const create = (data) => {
+  return new Promise((resolve, reject) => {
+    connection.query("INSERT INTO list_news SET ?", data, (err, result) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(result);
+    });
+  });
+};
+
+export const deleteAllNews = () => {
+  return new Promise((resolve, reject) => {
+    connection.query("DELETE FROM list_news", (err, result) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(result);
+    });
+  });
+};
+
+export const readNewsById = (id) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM list_news WHERE id=?",
+      id,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      }
+    );
+  });
+};
+
+export const updateNewsById = (data, id) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "UPDATE list_news SET ? WHERE id=?",
+      [data, id],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      }
+    );
+  });
+};
