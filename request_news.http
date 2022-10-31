@@ -20,14 +20,14 @@ DELETE http://localhost:3000/news
 GET http://localhost:3000/news/320
 
 ###
- PUT http://localhost:3000/news/31
+ PUT http://localhost:3000/news/1
 Content-Type: application/json
 
- {
+{
     "title": "UPDATE NEWS",
     "img": "PATH_2"
 }
  
 ###
 
-DELETE http://localhost:3000/news/2
+DELETE http://localhost:3000/news/200

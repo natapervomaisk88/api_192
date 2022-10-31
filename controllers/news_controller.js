@@ -54,7 +54,13 @@ export const getNewsById = (req, res, next) => {
 
 export const editNewsById = (req, res, next) => {
   updateNewsById(req.body, req.params.id)
-    .then(() => {
+    .then((result) => {
+      if (result.affectedRows == 0) {
+        return res.json({
+          error: true,
+          message: "Редагування не вдалося. Немає такої новини",
+        });
+      }
       next();
     })
     .catch((err) => {
