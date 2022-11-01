@@ -1,9 +1,22 @@
 import { Router } from "express";
 import { insertUser } from "../controllers/user_controller.js";
+import {
+  hasEmptyFields,
+  isPasswordsEqual,
+  isEmailUnique,
+} from "../middleware/validation.js";
 const router = Router();
 
-router.route("/user").post(insertUser, (req, res) => {
-  res.json({ error: false, message: "Користувача додано" });
-});
+router
+  .route("/user")
+  .post(
+    hasEmptyFields,
+    isPasswordsEqual,
+    isEmailUnique,
+    insertUser,
+    (req, res) => {
+      res.json({ error: false, message: "Користувача додано" });
+    }
+  );
 
 export default router;
