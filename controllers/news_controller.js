@@ -6,6 +6,8 @@ import {
   updateNewsById,
 } from "../models/news.js";
 
+
+
 export const getAllNews = (req, res, next) => {
   findAll()
     .then((result) => {

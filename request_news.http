@@ -10,7 +10,7 @@ Content-Type: application/json
     "text": "Текст новини",
     "img": "",
     "isActive": 0,
-    "author_id": 1
+    "author_id": 1,
 }
 
 ###

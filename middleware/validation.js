@@ -1,12 +1,12 @@
 import { readUserByEmail } from "../models/user.js";
-const isPasswordsEqual = (req, res, next) => {
+export const isPasswordsEqual = (req, res, next) => {
   if (req.body.password !== req.body.repeat_password) {
     return res.json({ error: true, message: "Паролі не збігаються" });
   }
   next();
 };
 
-const hasEmptyFields = (req, res, next) => {
+export const hasEmptyFields = (req, res, next) => {
   const { name, email, password, repeat_password } = req.body;
   if (!name || !email || !password || !repeat_password) {
     return res.json({ error: true, message: "Є порожні поля" });
@@ -14,7 +14,7 @@ const hasEmptyFields = (req, res, next) => {
   next();
 };
 
-const isEmailUnique = (req, res, next) => {
+export const isEmailUnique = (req, res, next) => {
   readUserByEmail(req.body.email)
     .then((result) => {
       if (result.length != 0) {
@@ -26,5 +26,3 @@ const isEmailUnique = (req, res, next) => {
       return res.json({ error: true, message: "Помилка в БД" });
     });
 };
-
-export { isPasswordsEqual, hasEmptyFields, isEmailUnique };

@@ -2,6 +2,7 @@ import { create, readUserByEmail } from "../models/user.js";
 import { readRoleIdByName } from "../models/role.js";
 import config from "../config/main.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // const isEmailUnique = (req, res, next) => {
 //   readUserByEmail(req.body.email)
@@ -32,10 +33,12 @@ export const insertUser = (req, res, next) => {
                 req.body.id_role = result[0].id;
                 console.log(req.body);
                 create(req.body)
-                  .then(() => {
+                  .then((result) => {
+                    req.token = jwt.sign(result, config.TOKEN_SECRET_KEY);
                     next();
                   })
                   .catch((err) => {
+                    console.log("Catch");
                     return res.json({ error: true, message: err });
                   });
               } else {

@@ -9,14 +9,8 @@ const router = Router();
 
 router
   .route("/user")
-  .post(
-    hasEmptyFields,
-    isPasswordsEqual,
-    isEmailUnique,
-    insertUser,
-    (req, res) => {
-      res.json({ error: false, message: "Користувача додано" });
-    }
-  );
+  .post(hasEmptyFields, isPasswordsEqual, isEmailUnique, insertUser, (req, res) => {
+    res.json({ error: false, token: req.token, message: "Користувача додано" });
+  });
 
 export default router;

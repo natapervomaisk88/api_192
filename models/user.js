@@ -6,7 +6,7 @@ export const create = (data) => {
       if (err) {
         reject(err);
       }
-      resolve(result);
+      resolve(result.insertId);
     });
   });
 };
